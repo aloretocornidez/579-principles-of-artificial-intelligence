@@ -4,7 +4,13 @@ Student Name: Alan Manuel Loreto Cornídez
 
 <!-- ## Question -->
 
-<!-- For the intersection problem discussed in class, please propose a brief concept (1 page maximum) of how you would implement the traffic light control scheme in a real-world environment. Please note that I would like to see a concept that applies to more than just the example in class (for instance, how would you deal with the issue when the coloring solution results in more than red/green colors). -->
+
+<!-- For the intersection problem discussed in class, please propose a brief concept -->
+<!-- (1 page maximum) of how you would implement the traffic light control scheme in -->
+<!-- a real-world environment. Please note that I would like to see a concept that -->
+<!-- applies to more than just the example in class (for instance, how would you deal -->
+<!-- with the issue when the coloring solution results in more than red/green -->
+<!-- colors). -->
 
 ## Response
 
