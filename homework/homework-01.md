@@ -1,6 +1,6 @@
 # ECE 579 | Homework 1
 
-Student Name: Alan Manuel Loreto Cornídez
+Name: Alan Manuel Loreto Cornídez
 
 <!-- ## Question -->
 
@@ -39,7 +39,7 @@ accordingly.
 Up to this point, we have increased the complexity of the system many times
 over. From a simple state machine with less than 5 states, to a much larger
 state machine that takes into account the green state of one intersection, the
-changing state of another, the ability to change how quicky a system transitions
+changing state of another, the ability to change how quickly a system transitions
 states. Our system is quickly growing...
 
 After considering the most basic implementation of a crossing with slight
