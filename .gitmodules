@@ -1,3 +1,4 @@
 [submodule "project"]
 	path = project
-	url = git@github.com:aloretocornidez/579-project.git
+  url = git@github.com:aloretocornidez/579-project.git
+  branch = main
