@@ -13,7 +13,7 @@ public:
   void PrintNode();
 
   // calculate the total cost of the current board.
-  void calculateBoardCost();
+  void updateBoardCost();
 
   // set the new board state using a string.
   void setBoard(std::string input);
@@ -23,6 +23,8 @@ public:
 
 private:
   char board[7];
+  const int boardSize = 7;
+  int boardCost;
   Node *parent;
   std::vector<Node *> children;
   int hOfNnode;
@@ -37,9 +39,11 @@ Node::Node() {
   this->board[4] = 'w';
   this->board[5] = 'w';
   this->board[6] = '_';
+
+  updateBoardCost();
 }
 
-Node::Node(std::string input){
+Node::Node(std::string input) {
   this->board[0] = input.at(0);
   this->board[1] = input.at(1);
   this->board[2] = input.at(2);
@@ -48,19 +52,36 @@ Node::Node(std::string input){
   this->board[5] = input.at(5);
   this->board[6] = input.at(6);
 
+  updateBoardCost();
 }
 
 Node::~Node() {}
 
 // Print the board values.
 void Node::PrintNode() {
-  for (int i = 0; i < 7; i++) {
+  std::cout << "Board Cost: " << this->boardCost << std::endl;
+  for (int i = 0; i < this->boardSize; i++) {
     std::cout << this->board[i];
   }
   std::cout << std::endl;
 }
 
-void Node::calculateBoardCost() {}
+void Node::updateBoardCost() {
+
+  int blackTiles = 0;
+  int cost = 0;
+  for (int i = 0; i < this->boardSize; i++) {
+    if (this->board[i] == 'b') {
+      blackTiles++;
+    }
+
+    if (this->board[i] == 'w') {
+      cost += blackTiles;
+    }
+  }
+
+  this->boardCost = cost;
+}
 
 void Node::setBoard(std::string input) {
 
@@ -76,11 +97,13 @@ void Node::setBoard(std::string input) {
   this->board[4] = input.at(4);
   this->board[5] = input.at(5);
   this->board[6] = input.at(6);
+
+  updateBoardCost();
 }
 
-void Node::moveTile(int tile, int move) {
-  if (tile < 0 || tile >= 7) {
-    std::cout << "Invalid tile Size used ot move tile. Tile Size: " << tile
+void Node::moveTile(int tileIndex, int move) {
+  if (tileIndex < 0 || tileIndex >= 7) {
+    std::cout << "Invalid tile Size used to move tile. Tile Size: " << tileIndex
               << std::endl;
     exit(-1);
   }
@@ -92,36 +115,120 @@ void Node::moveTile(int tile, int move) {
   // 3. Tile moves to the adjecent left.
   // 4. Tile hops over one tile to the left.
   // 5. Tile hops over two tiles to the left.
-  char tempTile = this->board[tile];
 
-  // bbb_www
-  switch (move) {
-  case 0:
-    this->board[tile] = this->board[tile+3];
-    this->board[tile+3] = tempTile;
-    break;
-  case 1:
-    this->board[tile] = this->board[tile+2];
-    this->board[tile+2] = tempTile;
-    break;
-  case 2:
-    break;
-  case 3:
-    break;
-  case 4:
-    break;
-  case 5:
-    break;
+  // checking move and making the move if it is valid.
+  if (move == 0) {
+
+    int change = 3;
+    if (tileIndex + change >= 7 || tileIndex + change < 0) {
+      std::cout << "The move is out of bounds" << std::endl;
+      exit(-1);
+    }
+    if (this->board[tileIndex + change] != '_') {
+      std::cout << "Tile " << tileIndex
+                << " cannot hop over two places to the right." << std::endl;
+      exit(-1);
+    }
+    char tempTile = this->board[tileIndex];
+
+    this->board[tileIndex] = this->board[tileIndex + change];
+    this->board[tileIndex + change] = tempTile;
+  } else if (move == 1) {
+
+    int change = 2;
+    if (tileIndex + change >= 7 || tileIndex + change < 0) {
+      std::cout << "The move is out of bounds" << std::endl;
+      exit(-1);
+    }
+    if (this->board[tileIndex + change] != '_') {
+      std::cout << "Tile " << tileIndex
+                << " cannot hop over a tile to the right." << std::endl;
+      exit(-1);
+    }
+    char tempTile = this->board[tileIndex];
+
+    this->board[tileIndex] = this->board[tileIndex + change];
+    this->board[tileIndex + change] = tempTile;
+
+  } else if (move == 2) {
+    int change = 1;
+    if (tileIndex + change >= 7 || tileIndex + change < 0) {
+      std::cout << "The move is out of bounds" << std::endl;
+      exit(-1);
+    }
+    if (this->board[tileIndex + change] != '_') {
+      std::cout << "Tile " << tileIndex
+                << " cannot hop over a tile to the right." << std::endl;
+      exit(-1);
+    }
+    char tempTile = this->board[tileIndex];
+
+    this->board[tileIndex] = this->board[tileIndex + change];
+    this->board[tileIndex + change] = tempTile;
+
+  } else if (move == 3) {
+    int change = -1;
+    if (tileIndex + change >= 7 || tileIndex + change < 0) {
+      std::cout << "The move is out of bounds" << std::endl;
+      exit(-1);
+    }
+    if (this->board[tileIndex + change] != '_') {
+      std::cout << "Tile " << tileIndex
+                << " cannot hop over two tiles to the left." << std::endl;
+      exit(-1);
+    }
+    char tempTile = this->board[tileIndex];
+
+    this->board[tileIndex] = this->board[tileIndex + change];
+    this->board[tileIndex + change] = tempTile;
+
+  } else if (move == 4) {
+    int change = -2;
+    if (tileIndex + change >= 7 || tileIndex + change < 0) {
+      std::cout << "The move is out of bounds" << std::endl;
+      exit(-1);
+    }
+    if (this->board[tileIndex + change] != '_') {
+      std::cout << "Tile " << tileIndex
+                << " cannot hop over a tile to the left." << std::endl;
+      exit(-1);
+    }
+    char tempTile = this->board[tileIndex];
+
+    this->board[tileIndex] = this->board[tileIndex + change];
+    this->board[tileIndex + change] = tempTile;
+
+  } else if (move == 5) {
+
+    int change = -3;
+    if (tileIndex + change >= 7 || tileIndex + change < 0) {
+      std::cout << "The move is out of bounds" << std::endl;
+      exit(-1);
+    }
+    if (this->board[tileIndex + change] != '_') {
+      std::cout << "Tile " << tileIndex << "cannot move adjacent to the left."
+                << std::endl;
+      exit(-1);
+    }
+    char tempTile = this->board[tileIndex];
+
+    this->board[tileIndex] = this->board[tileIndex + change];
+    this->board[tileIndex + change] = tempTile;
+  } else {
+    std::cout << "Move was not made in moveTile. Move: " << move << std::endl;
+    exit(-1);
   }
+
+  updateBoardCost();
 }
 
 int main(int argc, char *argv[]) {
 
-  Node rootNode("bwb_www");
+  Node rootNode("bbbw_ww");
 
   rootNode.PrintNode();
 
-  rootNode.moveTile(0, 0);
+  rootNode.moveTile(2, 1);
 
   rootNode.PrintNode();
 

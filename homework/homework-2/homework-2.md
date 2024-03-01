@@ -30,6 +30,37 @@ Using the A\* algorithm grading method, we can set up the state space of our sys
 
 
 
+There are 6 possible moves from any given state unless it is not possible. Let us discuss the moves before beginning a state space search.
+We shall use a neutral position that allows all moves to demonstrate: BBB_WWW
+
+
+The 6 possible moves are:
+1. Left tile moves to right: BB_BWWW
+2. Right tile moves to left: BBBW_WW
+3. Left tile hops over to right: B_BBWWW
+4. Right tile hops over to left: BBBWW_W
+5. Left tile hops over two tiles to right: \_BBBWWW
+6. Right tile hops over two tiles to left: BBBWWW\_
+
+Now that we have established the possible 
+
+
+
+
+
+
+
+
+
+
+
+
+After that, we can begin traversal of the solution space to find the optimal solution for the given system:
+
+Using the beginning state:
+
+BBBWWW_ ($f(n) = 0 + 3 + 3 + 3 = 9$)
+
 
 
 
