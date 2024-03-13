@@ -29,10 +29,12 @@ public:
   void setBoard(std::string input);
 
   // pick a tile and make it move where you want.
-  void moveTile(int tile, int move);
+  int moveTile(int tile, int move);
+
+  int getCost();
 
   //
-  void operator=(Node const &obj);
+  // void operator=(Node const &obj);
 
 private:
   std::string board;

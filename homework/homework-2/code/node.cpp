@@ -3,7 +3,7 @@
 #include <string>
 
 // TODO
-void Node::operator=(Node const &input) { this->board = input.board; }
+// void Node::operator=(Node const &input) { this->board = input.board; }
 
 // Print the board values.
 void Node::PrintNode()
@@ -52,12 +52,13 @@ void Node::setBoard(std::string input)
   updateBoardCost();
 }
 
-void Node::moveTile(int tileIndex, int move)
+// Move the tile to a valid spot.
+int Node::moveTile(int tileIndex, int move)
 {
   if (tileIndex < 0 || tileIndex >= 7)
   {
     std::cout << "Invalid tile Size used to move tile. Tile Size: " << tileIndex << std::endl;
-    exit(-1);
+    return -1;
   }
 
   // there are 6 possible moves
@@ -77,12 +78,12 @@ void Node::moveTile(int tileIndex, int move)
     if (change >= 7 || change < 0)
     {
       std::cout << "The move is out of bounds" << std::endl;
-      exit(-1);
+      return -1;
     }
     if (this->board.at(change) != '_')
     {
       std::cout << "Tile " << tileIndex << " cannot hop over two places to the right." << std::endl;
-      exit(-1);
+      return -2;
     }
   }
   else if (move == 1)
@@ -92,12 +93,12 @@ void Node::moveTile(int tileIndex, int move)
     if (change >= 7 || change < 0)
     {
       std::cout << "The move is out of bounds" << std::endl;
-      exit(-1);
+      return -1;
     }
     if (this->board.at(change) != '_')
     {
       std::cout << "Tile " << tileIndex << " cannot hop over a tile to the right." << std::endl;
-      exit(-1);
+      return -2;
     }
   }
   else if (move == 2)
@@ -106,12 +107,12 @@ void Node::moveTile(int tileIndex, int move)
     if (change >= 7 || change < 0)
     {
       std::cout << "The move is out of bounds" << std::endl;
-      exit(-1);
+      return -1;
     }
     if (this->board.at(change) != '_')
     {
       std::cout << "Tile " << tileIndex << " cannot move adjacent to the right." << std::endl;
-      exit(-1);
+      return -2;
     }
   }
   else if (move == 3)
@@ -121,12 +122,12 @@ void Node::moveTile(int tileIndex, int move)
     if (change >= 7 || change < 0)
     {
       std::cout << "The move is out of bounds" << std::endl;
-      exit(-1);
+      return -1;
     }
     if (this->board.at(change) != '_')
     {
       std::cout << "Tile " << tileIndex << " cannot adjacent to the left." << std::endl;
-      exit(-1);
+      return -2;
     }
   }
   else if (move == 4)
@@ -135,12 +136,12 @@ void Node::moveTile(int tileIndex, int move)
     if (change >= 7 || change < 0)
     {
       std::cout << "The move is out of bounds" << std::endl;
-      exit(-1);
+      return -1;
     }
     if (this->board.at(change) != '_')
     {
       std::cout << "Tile " << tileIndex << " cannot hop over a tile to the left." << std::endl;
-      exit(-1);
+      return -2;
     }
   }
   else if (move == 5)
@@ -150,18 +151,18 @@ void Node::moveTile(int tileIndex, int move)
     if (change >= 7 || change < 0)
     {
       std::cout << "The move is out of bounds" << std::endl;
-      exit(-1);
+      return -1;
     }
     if (this->board.at(change) != '_')
     {
       std::cout << "Tile " << tileIndex << " cannot hop over two tiles to the left." << std::endl;
-      exit(-1);
+      return -2;
     }
   }
   else
   {
     std::cout << "Move was not made in moveTile. Move: " << move << std::endl;
-    exit(-1);
+    return -3;
   }
 
   // there are 6 possible moves
@@ -227,4 +228,11 @@ void Node::moveTile(int tileIndex, int move)
  
 
   updateBoardCost();
+
+  return 0;
+}
+
+int Node::getCost()
+{
+  return this->boardCost;
 }
