@@ -3,13 +3,14 @@
 CC=g++
 CFLAGS=-Wall -Wfatal-errors -lm
 
-SRC=main.cpp
+SRC=*.cpp
+
 PROGRAM=main
 
 .PHONY: all
 all: ${PROGRAM}
 
-program: ${SRC}
+${PROGRAM}: ${SRC}
 	${CC} ${CFLAGS} -o ${PROGRAM}  ${SRC}
 
 .PHONY: clean
