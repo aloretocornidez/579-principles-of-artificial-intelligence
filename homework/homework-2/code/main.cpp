@@ -28,15 +28,6 @@ int main(int argc, char *argv[])
   // Initialize the node.
   Node initialNode(firstState);
 
-  // Print the node.
-  initialNode.PrintNode();
-
-  int tile = 4;
-  int move = 3;
-  initialNode.moveTile(tile, move);
-  initialNode.PrintNode();
-
-
 
   return 0;
 }

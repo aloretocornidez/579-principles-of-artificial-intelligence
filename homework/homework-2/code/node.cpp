@@ -68,6 +68,7 @@ void Node::moveTile(int tileIndex, int move)
   // 4. Tile hops over one tile to the left.
   // 5. Tile hops over two tiles to the left.
 
+
   // checking move and making the move if it is valid.
   if (move == 0)
   {
@@ -83,10 +84,6 @@ void Node::moveTile(int tileIndex, int move)
       std::cout << "Tile " << tileIndex << " cannot hop over two places to the right." << std::endl;
       exit(-1);
     }
-    char tempTile = this->board.at(tileIndex);
-
-    this->board.at(tileIndex) = this->board.at(change);
-    this->board.at(change) = tempTile;
   }
   else if (move == 1)
   {
@@ -102,10 +99,6 @@ void Node::moveTile(int tileIndex, int move)
       std::cout << "Tile " << tileIndex << " cannot hop over a tile to the right." << std::endl;
       exit(-1);
     }
-    char tempTile = this->board.at(tileIndex);
-
-    this->board.at(tileIndex) = this->board.at(change);
-    this->board.at(change) = tempTile;
   }
   else if (move == 2)
   {
@@ -120,10 +113,6 @@ void Node::moveTile(int tileIndex, int move)
       std::cout << "Tile " << tileIndex << " cannot move adjacent to the right." << std::endl;
       exit(-1);
     }
-    char tempTile = this->board.at(tileIndex);
-
-    this->board.at(tileIndex) = this->board.at(change);
-    this->board.at(change) = tempTile;
   }
   else if (move == 3)
   {
@@ -139,10 +128,6 @@ void Node::moveTile(int tileIndex, int move)
       std::cout << "Tile " << tileIndex << " cannot adjacent to the left." << std::endl;
       exit(-1);
     }
-    char tempTile = this->board.at(tileIndex);
-
-    this->board.at(tileIndex) = this->board.at(change);
-    this->board.at(change) = tempTile;
   }
   else if (move == 4)
   {
@@ -157,10 +142,6 @@ void Node::moveTile(int tileIndex, int move)
       std::cout << "Tile " << tileIndex << " cannot hop over a tile to the left." << std::endl;
       exit(-1);
     }
-    char tempTile = this->board.at(tileIndex);
-
-    this->board.at(tileIndex) = this->board.at(change);
-    this->board.at(change) = tempTile;
   }
   else if (move == 5)
   {
@@ -176,16 +157,74 @@ void Node::moveTile(int tileIndex, int move)
       std::cout << "Tile " << tileIndex << " cannot hop over two tiles to the left." << std::endl;
       exit(-1);
     }
-    char tempTile = this->board.at(tileIndex);
-
-    this->board.at(tileIndex) = this->board.at(change);
-    this->board.at(change) = tempTile;
   }
   else
   {
     std::cout << "Move was not made in moveTile. Move: " << move << std::endl;
     exit(-1);
   }
+
+  // there are 6 possible moves
+  // 0. Tile hops two spots to the right.
+  // 1. Tile hops over one tile to the right.
+  // 2. Tile slides to the adjacent right.
+  // 3. Tile moves to the adjacent left.
+  // 4. Tile hops over one tile to the left.
+  // 5. Tile hops over two tiles to the left.
+
+  // making the move if it is valid.
+  if (move == 0)
+  {
+    int change = tileIndex + 3;
+
+    char tempTile = this->board.at(tileIndex);
+    this->board.at(tileIndex) = this->board.at(change);
+    this->board.at(change) = tempTile;
+  }
+  else if (move == 1)
+  {
+
+    int change = tileIndex + 2;
+    char tempTile = this->board.at(tileIndex);
+
+    this->board.at(tileIndex) = this->board.at(change);
+    this->board.at(change) = tempTile;
+  }
+  else if (move == 2)
+  {
+    int change = tileIndex + 1;
+    char tempTile = this->board.at(tileIndex);
+
+    this->board.at(tileIndex) = this->board.at(change);
+    this->board.at(change) = tempTile;
+  }
+  else if (move == 3)
+  {
+    int change = tileIndex - 1;
+
+    char tempTile = this->board.at(tileIndex);
+
+    this->board.at(tileIndex) = this->board.at(change);
+    this->board.at(change) = tempTile;
+  }
+  else if (move == 4)
+  {
+    int change = tileIndex - 2;
+    char tempTile = this->board.at(tileIndex);
+
+    this->board.at(tileIndex) = this->board.at(change);
+    this->board.at(change) = tempTile;
+  }
+  else if (move == 5)
+  {
+
+    int change = tileIndex - 3;
+    char tempTile = this->board.at(tileIndex);
+
+    this->board.at(tileIndex) = this->board.at(change);
+    this->board.at(change) = tempTile;
+  }
+ 
 
   updateBoardCost();
 }
