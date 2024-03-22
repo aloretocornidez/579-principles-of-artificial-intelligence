@@ -12,11 +12,17 @@ public:
   Node()
   {
     this->board = std::string(7, 'x');
+    this->parent = nullptr;
     updateBoardCost();
   };
 
   // Given the string
-  Node(std::string input) : board(input) { updateBoardCost(); };
+  Node(std::string input) : board(input)
+  {
+
+    this->parent = nullptr;
+    updateBoardCost();
+  };
 
   // Copy Constructor
   Node(const Node &input)
@@ -183,7 +189,7 @@ public:
     return true;
   }
 
-  int condutcMoveOperation(int tileIndex, int move)
+  int conductMoveOperation(int tileIndex, int move)
   {
 
     // there are 6 possible moves
@@ -267,23 +273,47 @@ public:
   {
     if (validMove(tileIndex, move))
     {
-      return condutcMoveOperation(tileIndex, move);
+      return conductMoveOperation(tileIndex, move);
     }
     return -1;
   }
 
   void printBoard() { std::cout << this->board << std::endl; }
 
+  void updateLevel()
+  {
+    int level = 0;
+    Node* temp = this;
+
+    while(temp != nullptr)
+    {
+      level++;
+      temp = this->parent;
+    }
+
+    this->levelsToRoot = level;
+
+  }
+
+
   /*
    * Getters
    */
+  int getLevel(){updateLevel(); return this->levelsToRoot;}
   int getBoardCost() { return this->boardCost; }
-  int getNodeCost() { return this->cumulativeMoveCost; }
+  int getCumilativeMoveCost() { return this->cumulativeMoveCost; }
   std::string getBoard() { return this->board; }
   Node *getParent() { return this->parent; }
   std::vector<Node *> getChildren() { return this->children; }
   void addChild(Node *newChild) { this->children.push_back(newChild); }
   void setParent(Node *newParent) { this->parent = newParent; }
+  void setChildren(std::vector<Node *> list)
+  {
+    for (int i = 0; i < list.size(); i++)
+    {
+      this->children.push_back(list.at(i));
+    }
+  }
 
 private:
   // Stores the state of the board.
@@ -297,6 +327,8 @@ private:
 
   // Stores the parent of the node.
   Node *parent;
+
+  int levelsToRoot;
 
   std::vector<Node *> children;
 };
