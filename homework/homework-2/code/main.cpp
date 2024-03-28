@@ -1,7 +1,7 @@
 #include "node.hpp"
 #include <iostream>
+#include <iterator>
 #include <ostream>
-#include <queue>
 #include <string>
 #include <vector>
 
@@ -27,7 +27,7 @@ public:
   Node *run()
   {
 
-    // used to find how long the alrorithm ran.
+    // used to find how long the algorithm ran.
     int iterations = 0;
 
     // create an open queue
@@ -48,20 +48,16 @@ public:
       // find the lowest cost node on the open queue.
       currNode = openQueue.at(openQueueMinIndex);
 
-
       // pop the node off of the queue.
       openQueue.erase(std::next(openQueue.begin(), openQueueMinIndex));
 
-
       // print the current node board
-      cout << "Current Board: " << currNode->getBoard() << endl;
-
+      cout << "Current Board: " << currNode->getBoard() + " Cost: " << currNode->getBoardCost() << endl;
 
       // return the node if a solution is found.
       if (currNode->getBoardCost() == 0)
       {
         cout << "Goal Reached! Printing Solution Now" << endl;
-
         return currNode;
       }
 
@@ -77,17 +73,16 @@ public:
 
       // add the moves to the queue.
       for (auto move : possibleMoves)
-      {
         openQueue.push_back(move);
-      }
 
       // Find the node with the lowest h cost and set the index of the node.
       int minHCost;
+
       for (int i = 0; i < openQueue.size(); i++)
       {
         Node *temp = openQueue.at(i);
 
-        int hCost = temp->getBoardCost() + temp->getCumilativeMoveCost() + temp->getLevel();
+        int hCost = temp->getBoardCost() + temp->getCumilativeMoveCost(); //  + temp->getLevel();
 
         if (i == 0)
         {
@@ -100,66 +95,57 @@ public:
           minHCost = hCost;
           openQueueMinIndex = i;
         }
-
       }
+      cout << "Open Queue After selecting min index" << endl;
+      for (auto t : openQueue)
+      {
+        t->printBoard();
+      };
 
-      // cout << "Current Open Queue\n";
-      // for(auto move : openQueue)
-      // {
-      //   move->printBoard();
-      // }
-      // cout << "Current Open Queue\n\n";
-      //
-      // cout << "Current possibleMoves\n";
-      // for(auto move : possibleMoves)
-      // {
-      //   move->printBoard();
-      // }
-      // cout << "Current possibleMoves\n\n";
-
-      // std::string asdf; std::cout << std::to_string(minHCost) << endl; std::cin >> asdf;
+      cout << "Selected Min Index: " + std::to_string(openQueueMinIndex) << endl;
+      std::string asdf; std::cin >> asdf;
 
       // update iteration count
       iterations++;
     }
-
-    // returns the
-    return currNode;
+    return nullptr;
   };
 
-  
-  void removeDupsInQueue(vector<Node*> possibleMoves, vector<Node*> openQueue)
+  void removeDupsInQueue(vector<Node *> children, vector<Node *> openQueue)
   {
-    // delete all duplicate nodes that already exist.
 
-    for(auto state : openQueue)
+    for (int state = 0; state < (int)openQueue.size(); state++)
     {
-      for (int index = 0; index < (int)possibleMoves.size(); index++)
+      for (int index = 0; index < (int)children.size(); index++)
       {
 
-        // looks for a node in the tree.
-        if (state->getBoard() == possibleMoves.at(index)->getBoard())
+        // looks for a node in the container and removes it.
+        if (openQueue.at(state)->getBoard() == children.at(index)->getBoard())
         {
-          // cout << "Duplicate Node Found: " << possibleMoves.at(index)->getBoard() << endl;
-          possibleMoves.erase(possibleMoves.begin(), possibleMoves.begin() + index);
+          if (openQueue.at(state)->getHeuristicCost() > children.at(index)->getHeuristicCost())
+          {
+            openQueue.erase(std::next(openQueue.begin(), state));
+          }
+          else
+          {
+            children.erase(std::next(children.begin(), index));
+          }
         }
       }
     }
-
   }
 
   // searches for a duplicate nodes in a given vector and removes them.
-  void removeDupsInTree(vector<Node *> possibleMoves)
+  void removeDupsInTree(vector<Node *> children)
   {
     // delete all duplicate nodes that already exist.
-    for (int index = 0; index < (int)possibleMoves.size(); index++)
+    for (int index = 0; index < (int)children.size(); index++)
     {
-
       // looks for a node in the tree.
-      if (searchForBoard(possibleMoves.at(index)))
+      if (searchForBoard(children.at(index)))
       {
-        // cout << "Duplicate Node Found: " << possibleMoves.at(index)->getBoard() << endl;
-        possibleMoves.erase(possibleMoves.begin(), possibleMoves.begin() + index);
+        children.erase(std::next(children.begin(), index));
+        // possibleMoves.erase(possibleMoves.begin(), possibleMoves.begin() + index);
       }
     }
   }
@@ -217,7 +203,7 @@ public:
   {
     vector<Node *> possibleMoves;
 
-    for (int tile = 0; tile < 6; tile++)
+    for (int tile = 0; tile < 7; tile++)
     {
 
       // iterate through all possible moves.
@@ -249,7 +235,7 @@ public:
   };
 
   // This function generates a vector given a solution node.
-  // The vector recurses back from to the parent node.
+  // The vector re-curses back from to the parent node.
   vector<Node *> generateSolution(Node *solution)
   {
 

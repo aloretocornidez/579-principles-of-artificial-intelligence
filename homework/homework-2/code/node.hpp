@@ -278,30 +278,44 @@ public:
     return -1;
   }
 
-  void printBoard() { std::cout << this->board << std::endl; }
+  void printBoard()
+  {
+    // std::cout << this->board << " Cost: " << this->getBoardCost() << std::endl;
+    std::cout << this->board << std::endl;
+  }
 
   void updateLevel()
   {
     int level = 0;
-    Node* temp = this;
+    Node *temp = this;
 
-    while(temp != nullptr)
+    while (temp != nullptr)
     {
       level++;
       temp = this->parent;
     }
 
     this->levelsToRoot = level;
-
   }
-
 
   /*
    * Getters
    */
-  int getLevel(){updateLevel(); return this->levelsToRoot;}
-  int getBoardCost() { return this->boardCost; }
+  int getLevel()
+  {
+    updateLevel();
+    return this->levelsToRoot;
+  }
+  int getBoardCost()
+  {
+    updateBoardCost();
+    return this->boardCost;
+  }
   int getCumilativeMoveCost() { return this->cumulativeMoveCost; }
+  int getHeuristicCost()
+  {
+    return this->getBoardCost() + this->getCumilativeMoveCost();
+  }
   std::string getBoard() { return this->board; }
   Node *getParent() { return this->parent; }
   std::vector<Node *> getChildren() { return this->children; }
