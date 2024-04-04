@@ -70,7 +70,7 @@ int a_star::findMinCost()
   {
     Node *temp = this->openQueue.at(i);
 
-    int hCost = temp->getBoardCost() + temp->getCumilativeMoveCost(); //  temp->getLevel();
+    int hCost = temp->getBoardCost() + temp->getCumilativeMoveCost();
     // int hCost = temp->getBoardCost() + temp->getCumilativeMoveCost() +
     // temp->getLevel();
 

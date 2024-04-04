@@ -8,11 +8,8 @@ output: pdf_document
 
 \newpage
 
-Name: Alan Manuel Loreto Cornídez
-
-Date: 03/28/2024
-
-Due Date: 02/24/2024
+\thispagestyle{empty} \clearpage \tableofcontents \pagenumbering{roman}
+\clearpage \pagenumbering{arabic} \setcounter{page}{1}
 
 # Problem Statement
 
@@ -80,13 +77,13 @@ and error checking has been conducted prior to the operation.
 - Rule 5 on Tile 5: `bbb_www` --> `bbbww_w`
 - Rule 6 on Tile 6: `bbb_www` --> `bbbwww_`
 
-Applying these rules to the intermediate states, we can then approach any
+Applying these rules to the intermediate states, we can then generate any
 possible permutation of of the game board.
 
 ## Definition 3 | What Are The Respective Costs Of Moving Between Intermediate States?
 
 The cost for transitioning between a state of the current system is relatively
-straightforward.However, the cost for transitioning between states is
+straightforward. However, the cost for transitioning between states is
 independent from other cost factors that are used by the search algorithm that
 is implemented. In this case, the A-star algorithm. For the implementation thus
 far, we can only define the cost for applying a rule to our current system
@@ -166,13 +163,71 @@ The `node` class was tasked with the following:
 - Storing the costs of each node at any given point.
 
 The `search_algorithm` class was tasked with the following:
-- conducting a search operation initial root node 
+
+- conducting a search operation initial root node
 - printing the solution when/if it is found.
-- Implementation of the search algorithm 
+- Implementation of the search algorithm
 - Manipulation of the costs for the search heuristics.
 
+## Methods of Each Data Structure
 
+Below are the methods implemented for each data structure that was used.
 
+### Methods for the `Node` Class
+
+- `void updateBoardCost()`: Calculates the sum of black tiles to the left of a
+  white tile on the node's board and stores the result in the node's `boardCost`
+  variable.
+
+- `int moveTile(int tileIndex, int move)`: This function is called by the user
+  of the nodes when a move wants to be made. Runs checks and returns the cost of
+  the move that was made.
+
+- `bool validateMove(int tileIndex, int move)`: Private class function that
+  checks if the inputs to the `moveTile` function are a valid move and returns
+  false if the move parameters are invalid.
+
+- `int conductMoveOperation(int tileIndex, int move)`: After the move is
+  validated by `validateMove`, this function conducts the move operation by
+  moving board elements accordingly.
+
+- `void incrementNodeCost(int cost)`: Increments the node cost according by the
+  amount specified by the caller.
+
+- `void printBoard()`: Prints the board state of the node.
+
+- `void updateLevel()`: Traverses through the source node's parents until the
+  root node is reached and counts how many nodes were traversed. This number is
+  returned as the level of the node in the tree.
+
+### Methods for the `search_algorithm` Class
+
+- `Node \*a_star_run()`: This class runs the A-Star algorithm and returns a
+  pointer to the solution node.
+
+- `int findMinCost()`: Returns the minimum cost in the open queue for the A-Star
+  Algorithm.
+
+- `vector<Node *> generateChildMoves(Node *currNode)`: Generate a vector that
+  points to all nodes that are possible children of the input node.
+
+- `void removeDupsInQueue(vector<Node *> *children)`: This function takes as
+  input a vector of node pointers. The function checks if the vector contains
+  nodes that have a board state that is already present in the open queue.
+- `void removeDupsInTree(vector<Node *> *children)`:
+
+- `Node *searchTreeForBoard(Node *input)`: This function takes as input a vector
+  of node pointers. The function checks if the vector contains nodes that have a
+  board state that is already present in the solution state space, that is, the
+  search tree.
+
+- `void showOptimalPath(vector<Node \*> solution)`: This function takes as input
+  a vector of nodes and prints the contents of the node sequentially.
+
+- `vector<Node *> generateSolution(Node *solution)`: Takes as input a solution
+  node and generates a vector containing the pointers to of parents of each node
+  up to the root node of the tree. This function then reverses the vector and
+  returns the solution path from the root node to the solution.
 
 # Examples
 

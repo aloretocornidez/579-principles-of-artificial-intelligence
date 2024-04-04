@@ -18,14 +18,14 @@ public:
   void printRoot();
   Node *a_star_run();
   int findMinCost();
-  void removeDupsInQueue(vector<Node *> *children);
-  void removeDupsInTree(vector<Node *> *children);
   Node *searchTreeForBoard(Node *input);
   vector<Node *> generateChildMoves(Node *currNode);
   void showOptimalPath(vector<Node *> solution);
   vector<Node *> generateSolution(Node *solution);
 
 private:
+  void removeDupsInQueue(vector<Node *> *children);
+  void removeDupsInTree(vector<Node *> *children);
   Node *rootNode;
   std::vector<Node *> openQueue;
 };

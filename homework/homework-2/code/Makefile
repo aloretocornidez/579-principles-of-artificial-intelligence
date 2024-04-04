@@ -1,7 +1,7 @@
 # This is a basic makefile to compile a program.
 
 CC=g++
-CFLAGS=-Wall -Wfatal-errors -lm
+CFLAGS=-Wall -Wfatal-errors
 
 SRC=*.cpp
 
