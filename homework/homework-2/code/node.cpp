@@ -1,5 +1,6 @@
 #include "node.hpp"
 #include <iostream>
+#include <string>
 
 // calculate the total cost of the current board and assign the cost to the
 // `boardCost` variable.
@@ -222,9 +223,41 @@ int Node::moveTile(int tileIndex, int move)
 
 void Node::printBoard()
 {
-  std::cout << this->board << " Cost: " << this->getCumilativeMoveCost() << std::endl;
-  // std::cout << this->board << " Cost: " << this->getHeuristicCost() <<
-  // std::endl; std::cout << this->board << std::endl;
+
+  std::string board = this->getBoard();
+
+  std::string output;
+
+  output.append("┌─┬─┬─┬─┬─┬─┬─┐");
+  output.append(" Board Cost: " + std::to_string(this->getBoardCost()) + "\n");
+
+  // Each Column
+  std::string column = "│";
+  output.append(column);
+  for (unsigned int i = 0; i < board.size(); i++)
+  {
+
+    if (board.at(i) == 'w')
+    {
+      output.append("■");
+    }
+    else if (board.at(i) == 'b')
+    {
+      output.append("□");
+    }
+    else
+    {
+      output.append(" ");
+    }
+
+    output.append(column);
+  }
+
+  output.append(" Heuristic Cost: " + std::to_string(this->getHeuristicCost()));
+
+  output.append("\n└─┴─┴─┴─┴─┴─┴─┘");
+
+  std::cout << output << std::endl;
 }
 
 void Node::updateLevel()

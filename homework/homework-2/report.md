@@ -16,6 +16,10 @@ output: pdf_document
 Given an initial configuration of a sliding puzzle and a corresponding possible
 move-set, please solve the system in the most efficient way possible.
 
+![A depiction of the initial problem statement as well as possible actions that
+allow transitions between node states.](./attachments/Pasted image
+20240226092434.png)
+
 # System Definitions
 
 In order to begin our approach to a solution, we must first define the system's
@@ -169,7 +173,7 @@ The `search_algorithm` class was tasked with the following:
 - Implementation of the search algorithm
 - Manipulation of the costs for the search heuristics.
 
-## Methods of Each Data Structure
+## Methods For Each Class
 
 Below are the methods implemented for each data structure that was used.
 
@@ -229,7 +233,55 @@ Below are the methods implemented for each data structure that was used.
   up to the root node of the tree. This function then reverses the vector and
   returns the solution path from the root node to the solution.
 
+## Code Compilation and Execution
+
+### File Structure
+
+The file structure is as follows in the base directory of the project:
+
+```
+.
+|-- main.cpp
+|-- Makefile
+|-- node.cpp
+|-- node.hpp
+|-- search_algorithm.cpp
+`-- search_algorithm.hpp
+```
+
+### Build System
+
+### Compilation and Execution
+
+The code can be compiled with a simple `Makefile` that compiles a binary called
+`main`.
+
+Running the following command from the project's base directory lets the user
+compile the code and run the algorithm on any board state by entering the
+initial board state as a string argument. The command below shows an example
+using `wbbww_b` as an example.
+
+```bash
+make && ./main "wbbww_b"
+```
+
+If no board state is given as a string argument, then the default board state is
+`bbbwww_` which is the board state given in the homework problem statement.
+
+### Source Code
+
+The source code can be found with the submission in addition to being hosted as
+a `git` repository at the following link:
+[https://github.com/aloretocornidez/579-principles-of-artificial-intelligence](https://github.com/aloretocornidez/579-principles-of-artificial-intelligence)
+
 # Examples
+
+Now that the project architecture has been explained in addition to the methods
+to run the project
+
+## Example 1 | State: `bbbwww_`
+
+
 
 # Question Answers
 
