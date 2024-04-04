@@ -1,5 +1,7 @@
 ---
-ColumnLimit: 10000
+UseTab: Never
+IndentWidth: 2
 BreakBeforeBraces: Allman
+ColumnLimit: 10000
 ...
 
