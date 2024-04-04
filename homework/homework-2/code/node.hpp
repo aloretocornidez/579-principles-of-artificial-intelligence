@@ -206,7 +206,7 @@ public:
     if (move == 0)
     {
       int change = tileIndex + 3;
-      cost = 3;
+      cost = 2;
 
       char tempTile = this->board.at(tileIndex);
       this->board.at(tileIndex) = this->board.at(change);
@@ -214,7 +214,7 @@ public:
     }
     else if (move == 1)
     {
-      cost = 2;
+      cost = 1;
 
       int change = tileIndex + 2;
       char tempTile = this->board.at(tileIndex);
@@ -244,7 +244,7 @@ public:
     else if (move == 4)
     {
       int change = tileIndex - 2;
-      cost = 2;
+      cost = 1;
       char tempTile = this->board.at(tileIndex);
 
       this->board.at(tileIndex) = this->board.at(change);
@@ -254,7 +254,7 @@ public:
     {
 
       int change = tileIndex - 3;
-      cost = 3;
+      cost = 2;
       char tempTile = this->board.at(tileIndex);
 
       this->board.at(tileIndex) = this->board.at(change);
@@ -280,8 +280,9 @@ public:
 
   void printBoard()
   {
-    // std::cout << this->board << " Cost: " << this->getBoardCost() << std::endl;
-    std::cout << this->board << std::endl;
+    std::cout << this->board << " Cost: " << this->getCumilativeMoveCost() << std::endl;
+    // std::cout << this->board << " Cost: " << this->getHeuristicCost() << std::endl;
+    // std::cout << this->board << std::endl;
   }
 
   void updateLevel()
@@ -306,6 +307,14 @@ public:
     updateLevel();
     return this->levelsToRoot;
   }
+  bool isSolution()
+  {
+    if(this->getBoardCost() == 0)
+    {
+      return true;
+    }
+    return false;
+  }
   int getBoardCost()
   {
     updateBoardCost();
@@ -321,9 +330,9 @@ public:
   std::vector<Node *> getChildren() { return this->children; }
   void addChild(Node *newChild) { this->children.push_back(newChild); }
   void setParent(Node *newParent) { this->parent = newParent; }
-  void setChildren(std::vector<Node *> list)
+  void appendChildren(std::vector<Node *> list)
   {
-    for (int i = 0; i < list.size(); i++)
+    for (int i = 0; i < (int)list.size(); i++)
     {
       this->children.push_back(list.at(i));
     }
@@ -337,12 +346,12 @@ private:
   int boardCost;
 
   // stores the cost of the moves required to get to the current board state.
-  int cumulativeMoveCost; // TODO still need to implement the node cost features.
+  int cumulativeMoveCost; 
 
   // Stores the parent of the node.
   Node *parent;
 
-  int levelsToRoot;
+  int levelsToRoot; // stores the level of the node in the tree.
 
-  std::vector<Node *> children;
+  std::vector<Node *> children; // stores the children of the given node.
 };
