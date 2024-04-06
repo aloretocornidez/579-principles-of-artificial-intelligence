@@ -6,12 +6,11 @@ output: pdf_document
 fontfamily: roboto
 fontsize: 14pt
 monofont: "SourceCodePro-MediumIt"
-toc: true
 ---
 
-<!-- ![](){width=3in} -->
 
-\newpage
+\newpage 
+
 
 \thispagestyle{empty} \clearpage \tableofcontents \pagenumbering{roman}
 \clearpage \pagenumbering{arabic} \setcounter{page}{1}
@@ -391,7 +390,7 @@ enough time and resources, I would likely spend all of the time in the world
 trying to improve it. However, as we know, time and resources are finite in the
 world of engineering, and as such, I found that AI tools are not developed
 enough to augment my programming experience at this moment, they instead wasted
-my colleagues' time and I'm sure they would waste mine.
+my colleagues' time and I'm sure AI tools would waste mine.
 
 However, my approach to the solution may also not have been the most efficient
 way either. My implementation was made in `C++`, and thus, the time to program
