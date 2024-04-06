@@ -16,8 +16,16 @@ int main(int argc, char *argv[])
 
   parseArgs(argc, argv, &firstState);
 
+
+
+
+
   // Initialize the node.
   Node *initialNode = new Node(firstState);
+
+  // Print Starting State 
+  cout << "Running A-Star with the following initial game state: " << endl;
+  initialNode->printBoard();
 
   // Generate the first node.
   a_star myAStar(initialNode);
@@ -28,8 +36,13 @@ int main(int argc, char *argv[])
   // get the array for the solution
   vector<Node *> solutionArray = myAStar.generateSolution(solution);
 
+
+  cout << "\nSolution Found! The algorithm completed in " << myAStar.getIterations() <<  " iterations." << endl;
+  cout << "Printing the solution path.\n" << endl;
+
   // show the optimal solution
   myAStar.showOptimalPath(solutionArray);
+
 
   return 0;
 }

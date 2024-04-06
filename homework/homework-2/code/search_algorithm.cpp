@@ -1,4 +1,5 @@
 #include "search_algorithm.hpp"
+#include "node.hpp"
 
 using std::vector;
 
@@ -9,7 +10,7 @@ Node *a_star::a_star_run()
 {
 
   // used to find how long the algorithm ran.
-  int iterations = 0;
+  this->iterations = 0;
 
   // Begin testing at the root.
   this->openQueue.push_back(this->rootNode);
@@ -55,7 +56,7 @@ Node *a_star::a_star_run()
     openQueueMinIndex = this->findMinCost();
 
     // update iteration count
-    iterations++;
+    this->iterations++;
   }
 
   return nullptr;
@@ -229,4 +230,9 @@ vector<Node *> a_star::generateSolution(Node *solution)
   }
 
   return solutionVector;
+}
+
+int a_star::getIterations()
+{
+  return this->iterations;
 }
