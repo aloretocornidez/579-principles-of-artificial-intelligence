@@ -352,8 +352,8 @@ the board cost is 0 units.
 
 ![Example 5](assets/imgs/example-5.png){ height=512px margin=auto }
 
-As you can see, there are no iterations completed by the serach algorithm and
-the only node that is printed in the solution path is the inital node. Thus,
+As you can see, there are no iterations completed by the search algorithm and
+the only node that is printed in the solution path is the initial node. Thus,
 thus the heuristic cost is 0 units.
 
 # Problem Statement Question Responses
@@ -366,7 +366,7 @@ You may use open and available AI tools to:
 1. Solve this problem in the most efficient and optimal way.
 2. Solve the solutions, and how the solutions were obtained, specifically:
    a. A heuristic is advised that you should explain in the material you hand in.
-   b. An efficient search algorithm is advised that oyu should explain (how it
+   b. An efficient search algorithm is advised that you should explain (how it
      works)
    c. attach the code that your generative AI has written for you or explain what
      off-the-shelf modules you have used.
