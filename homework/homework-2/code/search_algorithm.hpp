@@ -22,10 +22,12 @@ public:
   vector<Node *> generateChildMoves(Node *currNode);
   void showOptimalPath(vector<Node *> solution);
   vector<Node *> generateSolution(Node *solution);
+  int getIterations();
 
 private:
   void removeDupsInQueue(vector<Node *> *children);
   void removeDupsInTree(vector<Node *> *children);
   Node *rootNode;
   std::vector<Node *> openQueue;
+  int iterations;
 };
