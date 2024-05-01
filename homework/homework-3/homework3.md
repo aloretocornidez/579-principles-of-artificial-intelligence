@@ -26,7 +26,9 @@ LT65 – less than 65
 
 ~ is a symbol for NOT
 
-# Answer
+# Response
+
+# Analysis of Problem Statement
 
 The Truth table for an iff statement is as follows:
 
@@ -49,40 +51,42 @@ otherwise, they cannot fly commercial.'
 | 0   | 1    | 0   |
 | 0   | 0    | 1   |
 
-Applying this case to
+Now we can compare the assertions made by each of the statements below.
+
+# Assertion 1
 
 1. $(C \wedge F) \Leftrightarrow LT65$
 
-<!-- TODO -->
+This statement has the following interpretation if we read it from left to
+right:
 
-| C   | LT65 | F   |
-| --- | ---- | --- |
-| 1   | 1    | 1   |
-| 1   | 1    | 0   |
-| 0   | 0    | 0   |
-| 0   | 1    | 1   |
+A person is less than 65 if and only if the person is certified and can fly.
 
-This table does not match the given statement, therefore, **it is not a valid
-logical representation.**
+The assertion of statement 1 is not equivalent to the assertion made in the
+given problem statement.
 
-2. $(C \Rightarrow (F \Rightarrow LT65))$
+# Assertion 2
 
-<!-- TODO -->
+2. $(C \Rightarrow (F \Leftrightarrow LT65))$
 
-| C   | LT65 | F   |
-| --- | ---- | --- |
-| 1   | 1    | 1   |
-| 1   | 0    | 0   |
-| 0   | 1    | 0   |
-| 0   | 0    | 1   |
+The English interpretation of this statement is as follows:
+
+If you are certified, then you can fly if and only if you are less than 65.
+
+The assertion made by statement 2 is equivalent to the assertion made in the
+problem statement.
+
+# Assertion 3
 
 3. $C \Rightarrow ((LT65 \Rightarrow F) \wedge \neg F)$
 
-<!-- TODO -->
+This statement is a tautology. That is because every combination of zeros and
+ones causes this statement to be true.
 
-| C   | LT65 | F   |
-| --- | ---- | --- |
-| 1   | 1    | 1   |
-| 1   | 0    | 0   |
-| 0   | 1    | 0   |
-| 0   | 0    | 1   |
+Here is the English interpretation of this statement.
+
+If you are certified, this implies that you are less than 65 and can fly, or
+that you are unable to fly.
+
+The assertion given in problem 3 does not match the assertion given in the
+problem statement.
